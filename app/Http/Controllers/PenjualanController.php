@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Pelanggan;
 use App\Models\Penjualan;
+use App\Models\Produk;
+use App\Models\DetailPenjualan;
 use Illuminate\Http\Request;
 
 class PenjualanController
@@ -76,7 +78,25 @@ class PenjualanController
      */
     public function update(Request $request, string $id)
     {
-        return $request;
+        $total_harga = $request->total_harga;
+        $jumlah_bayar = $request->jumlah_bayar;
+
+        if($jumlah_bayar <= $total_harga) {
+
+            return 'uang kurang uang anda ' . $jumlah_bayar;
+            // session([
+            //     'produks' => Produk::all(),
+            //     'data_penjualan' => Penjualan::find($id),
+            //     'detail_penjualans' => DetailPenjualan::where('penjualan_id', $id)->orderBy('created_at', 'desc')->get(),
+            //     'total_semua' => DetailPenjualan::where('penjualan_id', $id)->sum('subtotal')
+            // ]);
+
+            // return redirect('/DetailTransaksi/' . $id)->with('info', 'Uang anda kurang');
+        } else {
+
+            return 'berhasil';
+
+        }
     }
 
     /**

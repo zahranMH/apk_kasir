@@ -70,7 +70,7 @@
                     </div>
                     <h6 class="text-uppercase text-body mx-3 mt-4 text-xs font-weight-bolder mb-3">Daftar Barang Di Keranjang</h6>
                     <div class="card-body pt-4 p-3 overflow-auto" style="max-height: 500px;">
-                            <form action="/DetailTransaksi" class="p-0 m-0 me-4" method="POST">
+                        <form action="/DetailTransaksi" class="p-0 m-0 me-4" method="POST">
 
                             {{-- form delete --}}
                             @csrf
@@ -88,7 +88,7 @@
                                                 <h6 class="mb-1 text-dark text-sm">{{ $detail_penjualan->produk->nama_produk }}</h6>
                                                 <span class="text-xs">Rp. {{ number_format($detail_penjualan->produk->harga) }}</span>
                                             </div>
-                                            <div class="text-danger text-success text-sm font-weight-bold" style="margin-right:120px">
+                                            <div class="text-danger text-success text-sm font-weight-bold" style="margin-right:80px">
                                                 {{ $detail_penjualan->jumlah_produk }}
                                             </div>
                                         </div>
@@ -109,8 +109,16 @@
                         </div>
 
                         {{-- form tambah tabel penjualan --}}
-                        <form action="" class="p-0 m-0 d-flex flex-column align-items-center mt-2" method="POST">
+                        <form action="/penjualan/{{ $data_penjualan->id }}" class="p-0 m-0 d-flex flex-column align-items-center mt-2" method="POST">
                             @csrf
+                            @method('PUT')
+
+                            <!-- total semua -->
+                            <input type="hidden" name="total_harga" value="{{ $total_semua }}">
+                            
+                            <!-- jumlah bayar no_format -->
+                             <input type="text" name="jumlah_bayar_no_format" value="" id="jumlah_bayar_no_format">
+                            
                             <div class="d-flex align-items-center w-100 mb-2">
                                 <label for="jumlah_bayar" class="text-sm mx-3">Jumlah Bayar :</label>
                                 <input type="text" id="jumlah_bayar" name="jumlah_bayar" class="mb-2 text-sm form-control" value="0" style="max-width: 150px;" oninput="formatCurrency(this)">
@@ -141,6 +149,12 @@
 
         input.value = value;
     }
+
+    const JumlahBayar = document.getElementById('jumlah_bayar');
+    const JumlahBayarNoFormat = document.getElementById('jumlah_bayar_no_format');
+
+    console.log(JumlahBayar)
+    console.log(JumlahBayarNoFormat)
 </script>
 
 
@@ -151,6 +165,18 @@
   title: "Berhasil!",
   text: "{{ session('berhasil') }}",
   icon: "success"
+});
+</script>
+
+@endif
+
+@if (session('info'))
+
+<script>
+  Swal.fire({
+  title: "Peringatan!",
+  text: "{{ session('info') }}",
+  icon: "warning"
 });
 </script>
 
