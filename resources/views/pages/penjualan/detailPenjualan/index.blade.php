@@ -115,10 +115,7 @@
 
                             <!-- total semua -->
                             <input type="hidden" name="total_harga" value="{{ $total_semua }}">
-                            
-                            <!-- jumlah bayar no_format -->
-                             <input type="text" name="jumlah_bayar_no_format" value="" id="jumlah_bayar_no_format">
-                            
+
                             <div class="d-flex align-items-center w-100 mb-2">
                                 <label for="jumlah_bayar" class="text-sm mx-3">Jumlah Bayar :</label>
                                 <input type="text" id="jumlah_bayar" name="jumlah_bayar" class="mb-2 text-sm form-control" value="0" style="max-width: 150px;" oninput="formatCurrency(this)">
@@ -149,12 +146,6 @@
 
         input.value = value;
     }
-
-    const JumlahBayar = document.getElementById('jumlah_bayar');
-    const JumlahBayarNoFormat = document.getElementById('jumlah_bayar_no_format');
-
-    console.log(JumlahBayar)
-    console.log(JumlahBayarNoFormat)
 </script>
 
 

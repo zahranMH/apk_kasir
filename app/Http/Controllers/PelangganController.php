@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pelanggan;
+use App\Models\Penjualan;
 use Illuminate\Http\Request;
 
 class PelangganController
@@ -62,8 +63,13 @@ class PelangganController
      */
     public function destroy(string $id)
     {
+        // delete pelanggan
         Pelanggan::where('id', $id)->delete();
 
+        // delete penjualan yang bersangkutan penjualan
+        Penjualan::where('pelanggan_id', $id)->delete();
+
         return redirect('/pelanggan')->with('berhasil', "Data Berhasil Dihapus");
+
     }
 }
