@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DetailTransaksiController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PenjualanController;
@@ -7,9 +8,7 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/dashboard', function () {
-    return view('pages.dashboard');
-});
+Route::resource('/dashboard', DashboardController::class);
 
 Route::resource('/user', UserController::class);
 Route::resource('/pelanggan', PelangganController::class);
@@ -24,4 +23,5 @@ Route::get('/DetailTransaksi/create/{id}/{id_penjualan}', [DetailTransaksiContro
 Route::post('/DetailTransaksi', [DetailTransaksiController::class, 'store']);
 Route::delete('/DetailTransaksi', [DetailTransaksiController::class, 'destroy']);
 Route::get('/DetailTransaksi/{id}', [DetailTransaksiController::class, 'index']);
+Route::get('/DetailTransaksi/cetakStruk/{id}', [DetailTransaksiController::class, 'cetakStruk']);
 

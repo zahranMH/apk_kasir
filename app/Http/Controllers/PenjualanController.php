@@ -37,19 +37,19 @@ class PenjualanController
     {
 
         $pelanggan = Pelanggan::where('no_telepon', $request->no_telepon)->first();
-        
+
         if($pelanggan != null) {
-            
+
             $pelangganNama = $pelanggan->nama_pelanggan;
             $pelangganAlamat = $pelanggan->alamat;
             $pelangganNoTlp = $pelanggan->no_telepon;
-            
+
             // CEK JIKA PELANGGAN SUDAH TERDAFTAR
             if($pelangganNama == $request->nama_pelanggan && $pelangganAlamat == $request->alamat && $pelangganNoTlp == $request->no_telepon) {
-                
+
                 // JIKA PELANGGAN SUDAH TERDAFTAR
                 $pelangganId = $pelanggan->id;
-        
+
                  // insert penjualan
                 Penjualan::create([
                     'tgl_penjualan' => now(),
@@ -57,22 +57,22 @@ class PenjualanController
                     'jumlah_bayar' => 0,
                     'pelanggan_id' => $pelangganId
                 ]);
-                
+
                 return redirect('/penjualan')->with('berhasil', 'Berhasil membuat data transaksi');
-            } 
+            }
         } else {
             // JIKA PELANGGAN BELUM SUDAH TERDAFTAR
-                
+
                 // insert pelanggan
                 $validatedData = $request->validate([
                     'nama_pelanggan' => 'required|min:3|max:255',
                     'no_telepon' => 'required|min:3|max:255',
                     'alamat' => 'required'
                 ]);
-        
+
                 $pelangganBaru = Pelanggan::create($validatedData);
                 $pelangganId = $pelangganBaru->id;
-        
+
                  // insert penjualan
                 Penjualan::create([
                     'tgl_penjualan' => now(),
@@ -80,7 +80,7 @@ class PenjualanController
                     'jumlah_bayar' => 0,
                     'pelanggan_id' => $pelangganId
                 ]);
-                
+
                 return redirect('/penjualan')->with('berhasil', 'Berhasil membuat data transaksi');
         }
 
@@ -125,7 +125,7 @@ class PenjualanController
         } else {
 
             $penjualan = Penjualan::find($id);
-            
+
             $penjualan->update([
                 'total_harga' => $total_harga,
                 'jumlah_bayar' => $jumlah_bayar
@@ -140,6 +140,10 @@ class PenjualanController
      */
     public function destroy(string $id)
     {
-        //
+        Penjualan::where('id', $id)->delete();
+
+        DetailPenjualan::where('penjualan_id', $id)->delete();
+
+        return redirect('/penjualan')->with('berhasil', 'Data Berhasil Dihapus');
     }
 }

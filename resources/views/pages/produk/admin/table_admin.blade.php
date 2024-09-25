@@ -48,7 +48,7 @@
                     @if($produks->isEmpty())
 
                     <tr>
-                        <td class=" m-2 text-center text-secondary font-weight-bold text-xs" colspan="4">Data Produk Kosong</td>
+                        <td class=" m-2 text-center text-secondary font-weight-bold text-xs" colspan="5">Data Produk Kosong</td>
                     </tr>
 
                     @else

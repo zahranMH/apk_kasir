@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('penjualans', function (Blueprint $table) {
             $table->id();
             $table->date('tgl_penjualan');
-            $table->decimal('total_harga');
-            $table->decimal('jumlah_bayar');
+            $table->decimal('total_harga', 15,2);
+            $table->decimal('jumlah_bayar', 15,2);
             $table->foreignId("pelanggan_id");
             $table->timestamps();
         });

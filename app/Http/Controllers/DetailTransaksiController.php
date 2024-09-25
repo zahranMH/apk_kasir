@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DetailPenjualan;
+use App\Models\Pelanggan;
 use App\Models\Penjualan;
 use Illuminate\Http\Request;
 use App\Models\Produk;
@@ -100,4 +101,13 @@ class DetailTransaksiController
         }
 
     }
+
+    public function cetakStruk(String $id)
+    {
+        return view('pages.penjualan.detailPenjualan.cetakStruk', [
+            'penjualan' => Penjualan::find($id),
+            'detailPenjualans' => DetailPenjualan::where('penjualan_id', $id)->orderBy('created_at', 'DESC')->get()
+        ]);
+    }
+
 }

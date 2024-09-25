@@ -73,7 +73,7 @@
                             @if($penjualan->total_harga == 0 || $penjualan->jumlah_bayar == 0)
                               <a href="/DetailTransaksi/{{ $penjualan->id }}" class="badge badge-sm bg-gradient-info">Isi Keranjang</a>
                             @else
-                              <a href="#" class="badge badge-sm bg-gradient-secondary">Cetak Struk</a>
+                              <a href="/DetailTransaksi/cetakStruk/{{ $penjualan->id }}" class="badge badge-sm bg-gradient-secondary">Cetak Struk</a>
                             @endif
 
                             <form action="/penjualan/{{ $penjualan->id }}" method="POST" class="p-0 m-0" onsubmit="alertConfirm(event)">
