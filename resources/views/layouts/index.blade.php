@@ -40,7 +40,7 @@
         z-index: 100000;
     }
   </style>
-  
+
 </head>
 
 <body class="g-sidenav-show bg-gray-200">
@@ -85,10 +85,40 @@
 
 
   <!--   Core JS Files   -->
+
   <script src="/assets/js/core/popper.min.js"></script>
   <script src="/assets/js/core/bootstrap.min.js"></script>
   <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
+
+    {{-- sweetalert --}}
+
+    <script>
+
+        function alertConfirmLogout(event) {
+            event.preventDefault();
+            const formTarget = event.target;
+
+            Swal.fire({
+            title: "Konfirmasi",
+            text: "Yakin ingin logout?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ya",
+            cancelButtonText: "Tidak"
+            }).then((result) => {
+            if (result.isConfirmed) {
+
+                formTarget.submit();
+            }
+        });
+        }
+
+    </script>
+
+
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {

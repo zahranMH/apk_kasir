@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pelanggan;
-use App\Models\Penjualan;
 use Illuminate\Http\Request;
+use App\Models\Produk;
 
-class PelangganController
+class PetugasProdukController
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('pages.pelanggan.index', [
-            'pelanggans' => Pelanggan::all(),
+        return view('pages.produk.daftarProduk', [
+            'produks' => Produk::all()
         ]);
     }
 
@@ -39,7 +38,10 @@ class PelangganController
      */
     public function show(string $id)
     {
-        //
+        return view('pages.produk.show', [
+            'produks' => Produk::all(),
+            'produk' => Produk::find($id)
+        ]);
     }
 
     /**
@@ -63,13 +65,6 @@ class PelangganController
      */
     public function destroy(string $id)
     {
-        // delete pelanggan
-        Pelanggan::where('id', $id)->delete();
-
-        // delete penjualan yang bersangkutan penjualan
-        Penjualan::where('pelanggan_id', $id)->delete();
-
-        return redirect('/pelanggan')->with('berhasil', "Data Berhasil Dihapus");
-
+        //
     }
 }

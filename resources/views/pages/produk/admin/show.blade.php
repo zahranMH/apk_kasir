@@ -108,7 +108,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <a href="/ProdukAdmin" class="btn btn-success w-25 mt-3">Kembali</a>
+                            <a href="/produk" class="btn btn-success w-25 mt-3">Kembali</a>
                         </ul>
                     </div>
                 </div>

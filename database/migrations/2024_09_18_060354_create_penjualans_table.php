@@ -17,6 +17,7 @@ return new class extends Migration
             $table->decimal('total_harga', 15,2);
             $table->decimal('jumlah_bayar', 15,2);
             $table->foreignId("pelanggan_id");
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }

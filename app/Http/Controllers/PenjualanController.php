@@ -15,8 +15,12 @@ class PenjualanController
      */
     public function index()
     {
+
+        $user_login = Auth()->user()->id;
+
         return view('pages.penjualan.index', [
-            'penjualans' => Penjualan::orderBy('created_at', 'DESC')->get()
+            'penjualans_admin' => Penjualan::orderBy('created_at', 'DESC')->get(),
+            'penjualans' => Penjualan::where('user_id', $user_login)->orderBy('created_at', 'DESC')->get()
         ]);
     }
 
@@ -25,8 +29,12 @@ class PenjualanController
      */
     public function create()
     {
+
+        $user_login = Auth()->user()->id;
+
         return view('pages.penjualan.create', [
-            'penjualans' => Penjualan::all()
+            'penjualans_admin' => Penjualan::orderBy('created_at', 'DESC')->get(),
+            'penjualans' => Penjualan::where('user_id', $user_login)->orderBy('created_at', 'DESC')->get()
         ]);
     }
 
@@ -50,12 +58,16 @@ class PenjualanController
                 // JIKA PELANGGAN SUDAH TERDAFTAR
                 $pelangganId = $pelanggan->id;
 
+                // user_id yang sudah login
+                $user_login = Auth()->user()->id;
+
                  // insert penjualan
                 Penjualan::create([
                     'tgl_penjualan' => now(),
                     'total_harga' => 0,
                     'jumlah_bayar' => 0,
-                    'pelanggan_id' => $pelangganId
+                    'pelanggan_id' => $pelangganId,
+                    'user_id' => $user_login
                 ]);
 
                 return redirect('/penjualan')->with('berhasil', 'Berhasil membuat data transaksi');
@@ -73,12 +85,16 @@ class PenjualanController
                 $pelangganBaru = Pelanggan::create($validatedData);
                 $pelangganId = $pelangganBaru->id;
 
+                // user_id yang sudah login
+                $user_login = Auth()->user()->id;
+
                  // insert penjualan
                 Penjualan::create([
                     'tgl_penjualan' => now(),
                     'total_harga' => 0,
                     'jumlah_bayar' => 0,
-                    'pelanggan_id' => $pelangganId
+                    'pelanggan_id' => $pelangganId,
+                    'user_id' => $user_login
                 ]);
 
                 return redirect('/penjualan')->with('berhasil', 'Berhasil membuat data transaksi');

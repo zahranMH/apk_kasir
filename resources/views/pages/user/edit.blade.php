@@ -48,8 +48,8 @@
                                 <div class="input-group input-group-outline">
                                     <select name="level" id="level" class="form-control" required>
                                         <option value="" disabled>Pilih Level</option>
-                                        <option value="Admin" {{ $user->level == 'Admin' ? 'selected' : '' }}>Admin</option>
-                                        <option value="Petugas" {{ $user->level == 'Petugas' ? 'selected' : '' }}>Petugas</option>
+                                        <option value="admin" {{ $user->level == 'admin' ? 'selected' : '' }}>Admin</option>
+                                        <option value="petugas" {{ $user->level == 'petugas' ? 'selected' : '' }}>Petugas</option>
                                     </select>
                                 </div>
                             </div>

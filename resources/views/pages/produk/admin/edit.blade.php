@@ -68,7 +68,7 @@
 
                         </div>
 
-                        <button type="submit" class="btn btn-info">Tambah</button>
+                        <button type="submit" class="btn btn-info">Edit</button>
                         <a href="/produk" class="btn btn-warning">Kembali</a>
                     </form>
                 </div>

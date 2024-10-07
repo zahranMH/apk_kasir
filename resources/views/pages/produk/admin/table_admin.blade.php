@@ -21,7 +21,7 @@
                     <div class="d-flex justify-content-between mt-2">
                         <div class="d-flex">
                             <a href="/produk/create" class="btn btn-info mx-3">Tambah Data</a>
-                            <a href="/produk" class="btn btn-success">Kembali</a>
+                            <a href="/PetugasProduk" class="btn btn-success">Kembali</a>
                         </div>
                         <form action="">
                             <div class="ms-md-auto pe-md-3 d-flex align-items-center">

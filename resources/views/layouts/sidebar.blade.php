@@ -17,6 +17,10 @@
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
         </li>
+
+        {{-- cek jika admin --}}
+
+        @can('admin')
         <li class="nav-item">
           <a class="nav-link text-white" href="/user" style="{{ request()->is('user*') ? 'background-color: #e91e63;' : '' }}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -25,16 +29,19 @@
             <span class="nav-link-text ms-1">User</span>
           </a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link text-white " href="/pelanggan" style="{{ request()->is('pelanggan*') ? 'background-color: #e91e63;' : '' }}">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">monetization_on</i>
-            </div>
-            <span class="nav-link-text ms-1">Pelanggan</span>
-          </a>
+            <a class="nav-link text-white " href="/pelanggan" style="{{ request()->is('pelanggan*') ? 'background-color: #e91e63;' : '' }}">
+                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="material-icons opacity-10">people</i>
+                </div>
+                <span class="nav-link-text ms-1">Pelanggan</span>
+            </a>
         </li>
+        @endcan
+        
         <li class="nav-item">
-          <a class="nav-link text-white " href="/produk" style="{{ request()->is('produk*', 'ProdukAdmin*') ? 'background-color: #e91e63;' : '' }}">
+          <a class="nav-link text-white " href="/PetugasProduk" style="{{ request()->is('produk*', 'PetugasProduk*') ? 'background-color: #e91e63;' : '' }}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">store</i>
             </div>
@@ -42,26 +49,18 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="/penjualan" style="{{ request()->is('penjualan*') ? 'background-color: #e91e63;' : '' }}">
+          <a class="nav-link text-white " href="/penjualan" style="{{ request()->is('penjualan*', 'DetailTransaksi*') ? 'background-color: #e91e63;' : '' }}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">shopping_cart</i>
             </div>
             <span class="nav-link-text ms-1">Penjualan</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/notifications.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">notifications</i>
-            </div>
-            <span class="nav-link-text ms-1">Notifications</span>
-          </a>
-        </li>
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/profile.html">
+          <a class="nav-link text-white " href="/profile" style="{{ request()->is('profile*') ? 'background-color: #e91e63;' : '' }}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">person</i>
             </div>
@@ -69,27 +68,16 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/sign-in.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">login</i>
-            </div>
-            <span class="nav-link-text ms-1">Sign In</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/sign-up.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">assignment</i>
-            </div>
-            <span class="nav-link-text ms-1">Sign Up</span>
-          </a>
+            <form action="/logout" class="nav-link" method="POST" onsubmit="alertConfirmLogout(event)" style="position: relative; right: 5px;">
+                @csrf
+                <button class="text-white bg-transparent border-0 d-flex" type="submit">
+                  <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="material-icons opacity-10">logout</i>
+                  </div>
+                  <span class="nav-link-text ms-1">Logout</span>
+                </button>
+            </form>
         </li>
       </ul>
-    </div>
-    <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-      <div class="mx-3">
-        <a class="btn btn-outline-primary mt-4 w-100" href="https://www.creative-tim.com/learning-lab/bootstrap/overview/material-dashboard?ref=sidebarfree" type="button">Documentation</a>
-        <a class="btn bg-gradient-primary w-100" href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree" type="button">Upgrade to pro</a>
-      </div>
     </div>
   </aside>

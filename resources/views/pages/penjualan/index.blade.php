@@ -50,42 +50,82 @@
 
                 @else
 
-                @foreach ($penjualans as $penjualan)
-                  <tr>
-                    <td>
-                          <p class="text-sm mx-3">{{ $loop->iteration }}</p>
-                    </td>
-                    <td>
-                          <p class="text-sm mx-3">{{ $penjualan->tgl_penjualan }}</p>
-                    </td>
-                    <td>
-                        <p class="text-xs text-secondary mb-0">{{ number_format($penjualan->total_harga) }}</p>
-                    </td>
-                    <td>
-                        <p class="text-xs text-secondary mb-0">{{ number_format($penjualan->jumlah_bayar) }}</p>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <span class="">{{ $penjualan->pelanggan->nama_pelanggan }}</span>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                        <div class="d-flex justify-content-center gap-2">
+                    @can('admin')
+                    @foreach ($penjualans_admin as $penjualan)
+                    <tr>
+                        <td>
+                            <p class="text-sm mx-3">{{ $loop->iteration }}</p>
+                        </td>
+                        <td>
+                            <p class="text-sm mx-3">{{ $penjualan->tgl_penjualan }}</p>
+                        </td>
+                        <td>
+                            <p class="text-xs text-secondary mb-0">{{ number_format($penjualan->total_harga) }}</p>
+                        </td>
+                        <td>
+                            <p class="text-xs text-secondary mb-0">{{ number_format($penjualan->jumlah_bayar) }}</p>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                        <span class="">{{ $penjualan->pelanggan->nama_pelanggan }}</span>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                            <div class="d-flex justify-content-center gap-2">
 
-                            @if($penjualan->total_harga == 0 || $penjualan->jumlah_bayar == 0)
-                              <a href="/DetailTransaksi/{{ $penjualan->id }}" class="badge badge-sm bg-gradient-info">Isi Keranjang</a>
-                            @else
-                              <a href="/DetailTransaksi/cetakStruk/{{ $penjualan->id }}" class="badge badge-sm bg-gradient-secondary">Cetak Struk</a>
-                            @endif
+                                @if($penjualan->total_harga == 0 || $penjualan->jumlah_bayar == 0)
+                                <a href="/DetailTransaksi/{{ $penjualan->id }}" class="badge badge-sm bg-gradient-info">Isi Keranjang</a>
+                                @else
+                                <a href="/DetailTransaksi/cetakStruk/{{ $penjualan->id }}" class="badge badge-sm bg-gradient-secondary">Cetak Struk</a>
+                                @endif
 
-                            <form action="/penjualan/{{ $penjualan->id }}" method="POST" class="p-0 m-0" onsubmit="alertConfirm(event)">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="badge badge-sm bg-gradient-danger border-0">Hapus</button>
-                            </form>
-                        </div>
-                    </td>
-                  </tr>
+                                <form action="/penjualan/{{ $penjualan->id }}" method="POST" class="p-0 m-0" onsubmit="alertConfirm(event)">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="badge badge-sm bg-gradient-danger border-0">Hapus</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
 
-                @endforeach
+                    @endforeach
+
+                    @endcan
+
+                    @foreach ($penjualans as $penjualan)
+                    <tr>
+                        <td>
+                            <p class="text-sm mx-3">{{ $loop->iteration }}</p>
+                        </td>
+                        <td>
+                            <p class="text-sm mx-3">{{ $penjualan->tgl_penjualan }}</p>
+                        </td>
+                        <td>
+                            <p class="text-xs text-secondary mb-0">{{ number_format($penjualan->total_harga) }}</p>
+                        </td>
+                        <td>
+                            <p class="text-xs text-secondary mb-0">{{ number_format($penjualan->jumlah_bayar) }}</p>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                        <span class="">{{ $penjualan->pelanggan->nama_pelanggan }}</span>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                            <div class="d-flex justify-content-center gap-2">
+
+                                @if($penjualan->total_harga == 0 || $penjualan->jumlah_bayar == 0)
+                                <a href="/DetailTransaksi/{{ $penjualan->id }}" class="badge badge-sm bg-gradient-info">Isi Keranjang</a>
+                                @else
+                                <a href="/DetailTransaksi/cetakStruk/{{ $penjualan->id }}" class="badge badge-sm bg-gradient-secondary">Cetak Struk</a>
+                                @endif
+
+                                <form action="/penjualan/{{ $penjualan->id }}" method="POST" class="p-0 m-0" onsubmit="alertConfirm(event)">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="badge badge-sm bg-gradient-danger border-0">Hapus</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+
+                    @endforeach
 
                 @endif
                 </tbody>
@@ -136,6 +176,18 @@
   title: "Berhasil!",
   text: "{{ session('berhasil') }}",
   icon: "success"
+});
+</script>
+
+@endif
+
+@if (session('peringatan'))
+
+<script>
+  Swal.fire({
+  title: "Peringatan!",
+  text: "{{ session('peringatan') }}",
+  icon: "warning"
 });
 </script>
 

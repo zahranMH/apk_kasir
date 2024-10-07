@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 
 class UserController
@@ -13,6 +14,7 @@ class UserController
      */
     public function index()
     {
+        Gate::authorize('admin');
         return view('pages.user.index', [
             'users' => User::all()
         ]);

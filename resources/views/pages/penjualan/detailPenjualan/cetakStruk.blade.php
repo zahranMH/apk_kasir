@@ -13,7 +13,7 @@
 
     <div class="container">
         <div class="d-flex justify-content-between">
-            <p>Kasir : <b>Zahran Muhammad</b></p>
+            <p>Kasir : <b>{{ Auth()->user()->name }}</b></p>
             <p>Pelanggan : <b>{{ $penjualan->pelanggan->nama_pelanggan }}</b></p>
         </div>
     </div>

@@ -16,7 +16,7 @@
                         <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
                             <div class="d-flex justify-content-start align-items-center">
                                 <div class="img-container" style="flex: 0 0 auto; max-width: 50%; padding: 5px;">
-                                    <img src="/assets/img/produk/jordam-red.jpg" alt="" class="img-fluid border rounded-3">
+                                    <img src="/storage/{{ $produk->img_produk }}" alt="" class="img-fluid border rounded-3">
                                 </div>
                                 <div class="d-flex flex-column mx-4">
                                     <h6 class="mb-3 text-sm">{{ $produk->nama_produk }}</h6>
@@ -25,7 +25,7 @@
                                 </div>
                             </div>
                         </li>
-                        <a href="/produk" class="btn btn-success w-25 mt-3">Kembali</a>
+                        <a href="/PetugasProduk" class="btn btn-success w-25 mt-3">Kembali</a>
                     </ul>
                 </div>
             </div>

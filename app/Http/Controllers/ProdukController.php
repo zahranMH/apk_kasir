@@ -13,7 +13,7 @@ class ProdukController
      */
     public function index()
     {
-        return view('pages.produk.daftarProduk', [
+        return view('pages.produk.admin.table_admin', [
             'produks' => Produk::all()
         ]);
     }
@@ -42,7 +42,7 @@ class ProdukController
 
         Produk::create($validatedData);
 
-        return redirect('/ProdukAdmin')->with('berhasil', 'Data berhasil ditambahkan');
+        return redirect('/produk')->with('berhasil', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -99,7 +99,7 @@ class ProdukController
 
         Produk::where('id', $id)->update($validatedData);
 
-        return redirect('ProdukAdmin')->with('berhasil', 'Data Berhasil Diedit');
+        return redirect('/produk')->with('berhasil', 'Data Berhasil Diedit');
     }
 
     /**
@@ -117,22 +117,7 @@ class ProdukController
 
         $produk->delete();
 
-        return redirect('/ProdukAdmin')->with('berhasil', 'Data Berhasil Dihapus');
-    }
-
-    public function tableAdmin()
-    {
-        return view('pages.produk.admin.table_admin', [
-            'produks' => Produk::all()
-        ]);
-    }
-
-    public function showPetugas(String $id)
-    {
-        return view('pages.produk.show', [
-            'produks' => Produk::all(),
-            'produk' => Produk::find($id)
-        ]);
+        return redirect('/produk')->with('berhasil', 'Data Berhasil Dihapus');
     }
 
 }

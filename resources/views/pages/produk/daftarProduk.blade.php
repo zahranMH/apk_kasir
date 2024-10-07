@@ -15,7 +15,12 @@
                     <div class="card-header pb-0 px-3 d-flex justify-content-between">
                         <div class="d-block">
                             <h6 class="mb-0">Daftar Produk</h6>
-                            <a href="/ProdukAdmin" class="text-xs font-weight-bolder" style="color: gold">Admin</a>
+
+                            {{-- cek jika admin --}}
+                            @can('admin')
+                                <a href="/produk" class="text-xs font-weight-bolder" style="color: gold">Admin</a>
+                            @endcan
+                            
                         </div>
                         <form action="">
                             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -46,7 +51,7 @@
                                             <span class="mb-2 text-xs">Stok :<span class="text-dark ms-sm-2 font-weight-bold">{{ $produk->stok }}</span></span>
                                         </div>
                                         <div class="ms-auto text-end">
-                                            <a class="btn btn-link text-dark px-3 mb-0" href="/detail/{{ $produk->id }}">
+                                            <a class="btn btn-link text-dark px-3 mb-0" href="/PetugasProduk/{{ $produk->id }}">
                                                 <i class="material-icons text-sm me-2">info</i>Detail
                                             </a>
                                         </div>
@@ -67,5 +72,18 @@
 <main class="main-content position-absolute" style="top: 0; left: 0; right: 0; z-index: 100000;">
     @yield('modal-form')
 </main>
+
+@if (session('peringatan'))
+
+<script>
+  Swal.fire({
+  title: "Peringatan!",
+  text: "{{ session('peringatan') }}",
+  icon: "warning"
+});
+</script>
+
+@endif
+
 
 @endsection
